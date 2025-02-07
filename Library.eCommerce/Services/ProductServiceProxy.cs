@@ -67,7 +67,7 @@ namespace Library.eCommerce.Services
                 return null;
             }
 
-            Product? product = Products.FirstOrDefault(p => p.Id == id);
+            Product? product = Products.FirstOrDefault(p => p?.Id == id);
             Products.Remove(product);
 
             return product;
