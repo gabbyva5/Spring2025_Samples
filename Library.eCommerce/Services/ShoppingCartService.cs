@@ -12,11 +12,9 @@ namespace Library.eCommerce.Services
     {
         private ShoppingCartService()
         {
-            Cart= new Dictionary<int, int>();
+            Cart= new Dictionary<int, int>();   //stores id and quantity
         }
         public Dictionary<int, int> Cart { get; private set; }
-
-        private List<Product?> Stock= ProductServiceProxy.Current.Products;
 
         private static ShoppingCartService? instance;
         private static object instanceLock = new object();
@@ -38,23 +36,58 @@ namespace Library.eCommerce.Services
 
         public Product Add(Product product, int quan)
         {
-            if(product.Id==0)
-                return product;
-
+            if(Cart.ContainsKey(product.Id))
+                Update(product, Cart[product.Id]+quan);     //if item already exists in cart, update quantity
+            else
+            {
+                if(quan<=product.Quantity)
+                {
+                    Cart[product.Id]= quan;
+                    product.Quantity-=quan;
+                }
+            }
 
             return product;
         }
 
-        public Product? Delete(int id)
+        public Product Update(Product product, int quan)
         {
-            if(id == 0)
+            int quantity= Cart[product.Id];
+            int diff= quan-quantity;    //desired quantity - current quantity
+
+            if(diff<0)  //reduces quantity
             {
-                return null;
+                Cart[product.Id]= quantity+diff;
+                product.Quantity-=diff; 
+
+                if(Cart[product.Id]==0)
+                    Cart.Remove(product.Id);
+            }
+            else if(diff==product.Quantity)
+            {
+                Cart[product.Id]= quantity+diff;
+                product.Quantity=0;
+            }
+            else if(diff>product.Quantity)  //nothing happens if there's not enough inventory in stock
+                return product;
+            else if(diff<product.Quantity)
+            {
+                Cart[product.Id]= quantity+diff;
+                product.Quantity-= diff;
             }
 
-            Product? product = Stock.FirstOrDefault(p => p?.Id == id);
-            Stock.Remove(product);
+            return product;
+        }
 
+
+        public Product? Delete(Product product)
+        {
+            if(Cart.ContainsKey(product.Id))    //nothing happens if not in cart
+            {
+                product.Quantity+= Cart[product.Id];
+                Cart.Remove(product.Id);
+            }
+            
             return product;
         }
     }

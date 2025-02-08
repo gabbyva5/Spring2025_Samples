@@ -20,13 +20,14 @@ namespace Spring2025_Samples.Models
         {
             get
             {
-                return $"{Id}. {Name} ({Quantity} in stock)";
+                return $"{Id}. {Name} ({Quantity} in stock)\t ${Price} each";
             }
         }
 
         public Product()
         {
             Name = string.Empty;
+            Quantity= 1;
         }
 
         public override string ToString()
