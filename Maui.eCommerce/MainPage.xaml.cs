@@ -9,7 +9,7 @@ namespace Maui.eCommerce
         public MainPage()
         {
             InitializeComponent();
-            BindingContext = new MainViewModel();
+            BindingContext = this;
         }
 
         private void InventoryClicked(object sender, EventArgs e)
