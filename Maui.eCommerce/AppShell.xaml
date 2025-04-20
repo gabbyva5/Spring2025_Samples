@@ -21,7 +21,7 @@
         ContentTemplate="{DataTemplate views:CartManagementView}"
         Route="CartManagement" />
     <ShellContent
-        Title="Inventory"
+        Title="Inventory Modifications"
         ContentTemplate="{DataTemplate views:ProductDetails}"
         Route="Product" />
     <ShellContent

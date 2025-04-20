@@ -35,5 +35,4 @@ public partial class CartDetails : ContentPage
             BindingContext = new CartViewModel(ShoppingCartService.Current.GetById(ProductId)); 
         }
     }
-
 }

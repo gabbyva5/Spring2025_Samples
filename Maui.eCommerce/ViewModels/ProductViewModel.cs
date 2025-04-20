@@ -55,7 +55,7 @@ namespace Maui.eCommerce.ViewModels
                  }
             }
         }
- 
+
 
         public Product? Model { get; set; }
 

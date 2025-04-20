@@ -1,6 +1,5 @@
 using Library.eCommerce.Services;
 using Maui.eCommerce.ViewModels;
-using Spring2025_Samples.Models;
 
 namespace Maui.eCommerce.Views;
 
@@ -10,7 +9,6 @@ public partial class ProductDetails : ContentPage
 	public ProductDetails()
 	{
 		InitializeComponent();
-		
 	}
 
     public int ProductId { get; set; }
@@ -22,7 +20,7 @@ public partial class ProductDetails : ContentPage
 
     private void OkClicked(object sender, EventArgs e)
     {
-        (BindingContext as ProductViewModel).AddOrUpdate();
+        (BindingContext as ProductViewModel)?.AddOrUpdate();
         
         Shell.Current.GoToAsync("//InventoryManagement");
     }
@@ -37,6 +35,5 @@ public partial class ProductDetails : ContentPage
         {
             BindingContext = new ProductViewModel(ProductServiceProxy.Current.GetById(ProductId));
         }
-        
     }
 }
