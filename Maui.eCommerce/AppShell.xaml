@@ -24,4 +24,8 @@
         Title="Inventory"
         ContentTemplate="{DataTemplate views:ProductDetails}"
         Route="Product" />
+    <ShellContent
+        Title="Shopping Cart"
+        ContentTemplate="{DataTemplate views:CartManagementView}"
+        Route="Cart" />    
 </Shell>

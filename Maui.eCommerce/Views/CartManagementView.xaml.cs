@@ -14,12 +14,12 @@ public partial class CartManagementView : ContentPage
     private void AddOrUpdateClicked(object sender, EventArgs e)
     {
         var productId = (BindingContext as CartManagementViewModel)?.SelectedProduct?.Id;
-       // Shell.Current.GoToAsync($"//Cart?productId={productId}");
+        Shell.Current.GoToAsync($"//Cart?productId={productId}");
     }
 
     private void DeleteClicked(object sender, EventArgs e)
     {
-        //(BindingContext as CartManagementViewModel)?.Delete();
+        (BindingContext as CartManagementViewModel)?.Delete();
     }
 
     private void CancelClicked(object sender, EventArgs e)

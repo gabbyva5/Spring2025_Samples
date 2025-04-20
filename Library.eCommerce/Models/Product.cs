@@ -28,6 +28,7 @@ namespace Spring2025_Samples.Models
         {
             Name = string.Empty;
             Quantity= 1;
+            Price= 10.00;
         }
 
         public override string ToString()

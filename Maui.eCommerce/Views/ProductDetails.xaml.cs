@@ -10,7 +10,6 @@ public partial class ProductDetails : ContentPage
 	public ProductDetails()
 	{
 		InitializeComponent();
-		
 	}
 
     public int ProductId { get; set; }
@@ -37,6 +36,5 @@ public partial class ProductDetails : ContentPage
         {
             BindingContext = new ProductViewModel(ProductServiceProxy.Current.GetById(ProductId));
         }
-        
     }
 }

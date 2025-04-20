@@ -13,9 +13,9 @@ namespace Library.eCommerce.Services
         {
             Products = new List<Product?>
             {
-                new Product{Id = 1, Name ="Product 1"},
-                new Product{Id = 2, Name ="Product 2"},
-                new Product{Id = 3, Name ="Product 3"}
+                new Product{Id = 1, Name ="Product 1", Price=12.99},
+                new Product{Id = 2, Name ="Product 2", Price=30.00},
+                new Product{Id = 3, Name ="Product 3", Price=4.00}
             };
         }
 
@@ -55,13 +55,25 @@ namespace Library.eCommerce.Services
 
         public Product AddOrUpdate(Product product)
         {
+
             if(product.Id == 0)
             {
                 product.Id = LastKey + 1;
                 Products.Add(product);
+                return product;
             }
+            else
+            {            
+                var existingProd= GetById(product.Id);
+                existingProd.Name= product.Name;
+                if(product.Price>0.01)
+                    existingProd.Price= product.Price;
 
-            return product;
+                if(existingProd.Quantity<product.Quantity)  //to prevent items in cart that no longer exist
+                    existingProd.Quantity= product.Quantity;
+
+                return existingProd;
+            }
         }
 
         public Product? Delete(int id)

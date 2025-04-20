@@ -37,24 +37,32 @@ namespace Library.eCommerce.Services
 
         public Product AddOrUpdate(Product product)
         {
-            var inventoryProd= ProductServiceProxy.Current.Products.FirstOrDefault(p => p.Id == product.Id);
+            var inventoryProd= ProductServiceProxy.Current.GetById(product.Id);
 
             if(inventoryProd.Quantity < product.Quantity)
                 product.Quantity= inventoryProd.Quantity;    //if user wants more than is available, just give them the rest
 
 
             int diff;
-            var prod = Cart.Items.FirstOrDefault(p => p.Id == product.Id);
-            if (prod != null) 
+            var prodInCart = GetById(product.Id);
+            if(product.Quantity==0)
             {
-                if(product.Quantity < prod.Quantity)    
+                if(prodInCart != null)
                 {
-                    prod.Quantity+= product.Quantity;
-                    inventoryProd.Quantity-=product.Quantity;
+                    inventoryProd.Quantity+= prodInCart.Quantity;   //if quan is 0, prod will be removed from cart but will remain in inventory
+                    Cart.Items.Remove(prodInCart);
+                }
+            }
+            else if(prodInCart != null) 
+            {
+                if(product.Quantity < prodInCart.Quantity)    
+                {
+                    prodInCart.Quantity=product.Quantity;
+                    inventoryProd.Quantity+=product.Quantity;
                 }
                 else    //if the # in cart is less than new quantity
                 {
-                    prod.Quantity += product.Quantity;
+                    prodInCart.Quantity += product.Quantity;
                     inventoryProd.Quantity-=product.Quantity;
                 }
             }
@@ -64,19 +72,25 @@ namespace Library.eCommerce.Services
                 inventoryProd.Quantity-=product.Quantity;
             }
 
-            return prod;
+            return prodInCart;
         }
-
 
         public Product? Delete(Product product)
         {
-            var prod = Cart.Items.FirstOrDefault(p => p.Id == product.Id);
-            if (prod != null)
+            var cartProd = Cart.Items.FirstOrDefault(p => p.Id == product.Id);
+            if (cartProd != null)
             {
-                Cart.Items.Remove(prod);
+                var inventoryProd= ProductServiceProxy.Current.Products.FirstOrDefault(p => p.Id == product.Id);
+                inventoryProd.Quantity+=cartProd.Quantity;  //add product quantity back to inventory
+                Cart.Items.Remove(cartProd);
             }
 
-            return prod;
+            return cartProd;
+        }
+
+        public Product? GetById(int id)
+        {
+            return Cart.Items.FirstOrDefault(p => p.Id == id);
         }
     }
 }
