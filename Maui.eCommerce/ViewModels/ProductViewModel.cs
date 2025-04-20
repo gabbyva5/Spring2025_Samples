@@ -10,7 +10,8 @@ namespace Maui.eCommerce.ViewModels
 {
     public class ProductViewModel
     {
-        public string? Name { 
+        public string? Name 
+        { 
             get
             {
                 return Model?.Name ?? string.Empty;
@@ -25,11 +26,42 @@ namespace Maui.eCommerce.ViewModels
             }
         }
 
+        public int Quantity
+        {
+            get
+            {
+                return Model?.Quantity ?? 0;
+            }
+            set
+            {
+                if(Model != null && Model.Quantity != value)
+                {
+                    Model.Quantity = value;
+                }
+            }
+        }
+ 
+        public double Price
+        {
+            get
+            {
+                return Model?.Price ?? 0;
+            }
+            set
+            {
+                if(Model != null && Model.Price != value)
+                {
+                    Model.Price = value;
+                 }
+            }
+        }
+ 
+
         public Product? Model { get; set; }
 
-        public void AddOrUpdate()
+        public Product? AddOrUpdate()
         {
-            ProductServiceProxy.Current.AddOrUpdate(Model);
+            return ProductServiceProxy.Current.AddOrUpdate(Model);
         }
 
         public ProductViewModel() {
