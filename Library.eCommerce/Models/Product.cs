@@ -14,13 +14,13 @@ namespace Spring2025_Samples.Models
 
         public int Quantity {get; set;}
 
-        public int Price {get; set;}
+        public double Price {get; set;}
 
         public string? Display
         {
             get
             {
-                return $"{Id}. {Name} ({Quantity} in stock)\t ${Price} each";
+                return $"Id: {Id}   {Name} ({Quantity} in stock)    ${Price} each";
             }
         }
 

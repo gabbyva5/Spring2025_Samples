@@ -4,8 +4,6 @@ namespace Maui.eCommerce
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
-
         public MainPage()
         {
             InitializeComponent();
@@ -15,6 +13,11 @@ namespace Maui.eCommerce
         private void InventoryClicked(object sender, EventArgs e)
         {
             Shell.Current.GoToAsync("//InventoryManagement");
+        }
+
+        private void CartClicked(object sender, EventArgs e)
+        {
+            Shell.Current.GoToAsync("//CartManagement");
         }
     }
 
