@@ -25,7 +25,7 @@
         ContentTemplate="{DataTemplate views:ProductDetails}"
         Route="Product" />
     <ShellContent
-        Title="Shopping Cart Modifications"
+        Title="Shopping Cart"
         ContentTemplate="{DataTemplate views:CartDetails}"
-        Route="Cart" />    
+        Route="Cart" />
 </Shell>

@@ -34,13 +34,13 @@ namespace Maui.eCommerce.ViewModels
             }
             set
             {
-                if (Model != null && Model.Quantity != value)
+                if(Model != null && Model.Quantity != value)
                 {
                     Model.Quantity = value;
                 }
             }
         }
-
+ 
         public double Price
         {
             get
@@ -49,19 +49,19 @@ namespace Maui.eCommerce.ViewModels
             }
             set
             {
-                if (Model != null && Model.Price != value)
+                if(Model != null && Model.Price != value)
                 {
                     Model.Price = value;
-                }
+                 }
             }
         }
+
 
         public Product? Model { get; set; }
 
         public Product? AddOrUpdate()
         {
-            var item= ProductServiceProxy.Current.AddOrUpdate(Model);
-            return item;
+            return ProductServiceProxy.Current.AddOrUpdate(Model);
         }
 
         public ProductViewModel() {

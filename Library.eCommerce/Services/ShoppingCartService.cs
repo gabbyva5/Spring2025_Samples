@@ -35,54 +35,65 @@ namespace Library.eCommerce.Services
             }
         }
 
-        public Product AddOrUpdate(Product product)
+        public Product? AddOrUpdate(Product product)
         {
             var inventoryProd= ProductServiceProxy.Current.GetById(product.Id);
-
-            if(inventoryProd.Quantity < product.Quantity)
-                product.Quantity= inventoryProd.Quantity;    //if user wants more than is available, just give them the rest
-
-
-            int diff;
             var prodInCart = GetById(product.Id);
-            if(product.Quantity==0)
-            {
-                if(prodInCart != null)
+
+            if(inventoryProd != null)
+            {    
+                int cartQuan= prodInCart?.Quantity ?? 0;
+                if(inventoryProd.Quantity + cartQuan< product.Quantity)
+                    product.Quantity= inventoryProd.Quantity + cartQuan;    //if user wants more than is available, just give them the rest
+
+
+                if(product.Quantity==0)
                 {
-                    inventoryProd.Quantity+= prodInCart.Quantity;   //if quan is 0, prod will be removed from cart but will remain in inventory
-                    Cart.Items.Remove(prodInCart);
+                    if(prodInCart != null)
+                    {
+                        inventoryProd.Quantity+= prodInCart.Quantity;   //if quan is 0, prod will be removed from cart but will remain in inventory
+                        Cart.Items?.Remove(prodInCart);
+                    }
+                    return prodInCart;
                 }
-            }
-            else if(prodInCart != null) 
-            {
-                if(product.Quantity < prodInCart.Quantity)    
+                else if(prodInCart != null) 
                 {
-                    prodInCart.Quantity=product.Quantity;
-                    inventoryProd.Quantity+=product.Quantity;
+                    int diff;
+
+                    if(product.Quantity < prodInCart.Quantity)    
+                    {
+                        diff= prodInCart.Quantity- product.Quantity;
+                        prodInCart.Quantity=product.Quantity;
+                        inventoryProd.Quantity+=diff;
+                    }
+                    else    //if the # in cart is less than new quantity
+                    {
+                        diff= product.Quantity- prodInCart.Quantity;
+                        prodInCart.Quantity= product.Quantity;
+                        inventoryProd.Quantity-=diff;
+                    }
+
+                    return prodInCart;
                 }
-                else    //if the # in cart is less than new quantity
+                else
                 {
-                    prodInCart.Quantity += product.Quantity;
+                    Cart.Items?.Add(product);
                     inventoryProd.Quantity-=product.Quantity;
+                    return product;
                 }
-            }
-            else
-            {
-                Cart.Items.Add(product);
-                inventoryProd.Quantity-=product.Quantity;
             }
 
-            return prodInCart;
+            return null;    //return null if attempted product does not exist
         }
 
-        public Product? Delete(Product product)
+        public Product? Delete(int id)
         {
-            var cartProd = Cart.Items.FirstOrDefault(p => p.Id == product.Id);
-            if (cartProd != null)
+            var cartProd = Cart.Items?.FirstOrDefault(p => p.Id == id);
+            var inventoryProd= ProductServiceProxy.Current.Products.FirstOrDefault(p => p?.Id == id);
+            if (cartProd != null && inventoryProd != null)
             {
-                var inventoryProd= ProductServiceProxy.Current.Products.FirstOrDefault(p => p.Id == product.Id);
                 inventoryProd.Quantity+=cartProd.Quantity;  //add product quantity back to inventory
-                Cart.Items.Remove(cartProd);
+                Cart.Items?.Remove(cartProd);
             }
 
             return cartProd;
@@ -90,7 +101,7 @@ namespace Library.eCommerce.Services
 
         public Product? GetById(int id)
         {
-            return Cart.Items.FirstOrDefault(p => p.Id == id);
+            return Cart.Items?.FirstOrDefault(p => p.Id == id);
         }
     }
 }

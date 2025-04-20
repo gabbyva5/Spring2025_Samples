@@ -41,12 +41,12 @@ namespace Maui.eCommerce.ViewModels
 
         public Product? Delete()
         {
-            var item = _svc.Delete(SelectedProduct?.Id ?? 0);
+            var item = cartService.Delete(SelectedProduct?.Id ?? 0);
             NotifyPropertyChanged("Products");
-            //NotifyPropertyChanged("InventoryProducts");
+            NotifyPropertyChanged("InventoryProducts");
             return item;
         } 
-
+        
         public void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             if (propertyName is null)

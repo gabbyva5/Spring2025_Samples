@@ -16,23 +16,23 @@ public partial class CartDetails : ContentPage
     private void OkClicked(object sender, EventArgs e)
     {
         (BindingContext as CartViewModel)?.AddOrUpdate();
-        Shell.Current.GotoAsync("//CartManagement");
+        Shell.Current.GoToAsync("//CartManagement");
     }
 
     private void CancelClicked(object sender, EventArgs e)
     {
-        Shell.Current.GotoAsync("//CartManagement");
+        Shell.Current.GoToAsync("//CartManagement");
     }
 
     private void ContentPage_NavigatedTo(object sender, NavigatedToEventArgs e)
     {
-        if(ShoppingCartSevice.Current.GetById(ProductId) == null)
+        if(ShoppingCartService.Current.GetById(ProductId) == null)
         {
             BindingContext = new CartViewModel();
         }
         else
         {
-            BindingContext = new CartViewModel(ShoppingCartSevice.Current.GetById(ProductId)); 
+            BindingContext = new CartViewModel(ShoppingCartService.Current.GetById(ProductId)); 
         }
     }
 }

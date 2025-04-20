@@ -29,8 +29,7 @@ namespace Maui.eCommerce.ViewModels
 
         public Product? AddOrUpdate()
         {
-            var item= ShoppingCartService.Current.AddOrUpdate(Model);
-            return item;
+            return ShoppingCartService.Current.AddOrUpdate(Model);
         }
 
         public CartViewModel() {

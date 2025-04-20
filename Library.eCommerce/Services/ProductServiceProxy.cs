@@ -53,7 +53,7 @@ namespace Library.eCommerce.Services
         public List<Product?> Products { get; private set; }
 
 
-        public Product AddOrUpdate(Product product)
+        public Product? AddOrUpdate(Product product)
         {
 
             if(product.Id == 0)
@@ -63,14 +63,16 @@ namespace Library.eCommerce.Services
                 return product;
             }
             else
-            {            
+            {
                 var existingProd= GetById(product.Id);
-                existingProd.Name= product.Name;
-                if(product.Price>0.01)
-                    existingProd.Price= product.Price;
-
-                if(existingProd.Quantity<product.Quantity)  //to prevent items in cart that no longer exist
-                    existingProd.Quantity= product.Quantity;
+                if(existingProd != null)
+                {
+                    existingProd.Name= product.Name;
+                    if(product.Price>0.01)
+                        existingProd.Price= product.Price;
+                    if(existingProd.Quantity<product.Quantity)  //to prevent items in cart that no longer exist
+                        existingProd.Quantity= product.Quantity;
+                }
 
                 return existingProd;
             }
