@@ -15,7 +15,7 @@ public partial class CartDetails : ContentPage
 
     private void OkClicked(object sender, EventArgs e)
     {
-        (BindingContext as CartViewModel).AddOrUpdate();
+        (BindingContext as CartViewModel)?.AddOrUpdate();
         Shell.Current.GotoAsync("//CartManagement");
     }
 
@@ -35,5 +35,4 @@ public partial class CartDetails : ContentPage
             BindingContext = new CartViewModel(ShoppingCartSevice.Current.GetById(ProductId)); 
         }
     }
-
 }

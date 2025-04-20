@@ -21,11 +21,11 @@
         ContentTemplate="{DataTemplate views:CartManagementView}"
         Route="CartManagement" />
     <ShellContent
-        Title="Inventory"
+        Title="Inventory Modifications"
         ContentTemplate="{DataTemplate views:ProductDetails}"
         Route="Product" />
     <ShellContent
-        Title="Shopping Cart"
-        ContentTemplate="{DataTemplate views:CartManagementView}"
+        Title="Shopping Cart Modifications"
+        ContentTemplate="{DataTemplate views:CartDetails}"
         Route="Cart" />    
 </Shell>
