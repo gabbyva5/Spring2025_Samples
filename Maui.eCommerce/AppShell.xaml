@@ -28,4 +28,8 @@
         Title="Shopping Cart"
         ContentTemplate="{DataTemplate views:CartDetails}"
         Route="Cart" />
+    <ShellContent
+        Title="Checkout"
+        ContentTemplate="{DataTemplate views:CheckoutDetails}"
+        Route="Checkout" />
 </Shell>

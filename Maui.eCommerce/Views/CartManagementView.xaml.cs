@@ -33,6 +33,11 @@ public partial class CartManagementView : ContentPage
         Shell.Current.GoToAsync("//MainPage");
     }
 
+    private void CheckoutClicked(object sender, EventArgs e)
+    {
+        Shell.Current.GoToAsync("//Checkout");
+    }
+
 	private void InventorySearchClicked(object sender, EventArgs e)
     {
         (BindingContext as CartManagementViewModel)?.RefreshInventoryList();

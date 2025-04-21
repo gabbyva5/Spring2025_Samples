@@ -31,7 +31,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Label Grid.Column="0" Text="{Binding Display}"/>
-                            <Button Grid.Column="1" Text="Add to Cart" Clicked="AddClicked"/>
+                            <Button Grid.Column="1" Text="Add to Cart"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
@@ -65,8 +65,8 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Label Grid.Column="0" Text="{Binding Display}"/>
-                            <Button Grid.Column="1" Text="Edit" Clicked="EditClicked"/>
-                            <Button Grid.Column="2" Text="Delete" Clicked="DeleteClicked"/>
+                            <Button Grid.Column="1" Text="Edit"/>
+                            <Button Grid.Column="2" Text="Delete"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
@@ -75,6 +75,8 @@
         <Button Text="Edit" Clicked="EditClicked"/>
         <Button Text="Delete" Clicked="DeleteClicked"/>
         <Button Text="Go Back" Clicked="CancelClicked"/>
+
+        <Button Text="Checkout" FontSize="20" HorizontalOptions="Center" Margin="0,50,0,15" Clicked="CheckoutClicked"/>
 
     </VerticalStackLayout>
 </ContentPage>

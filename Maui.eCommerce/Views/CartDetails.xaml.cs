@@ -51,7 +51,14 @@ public partial class CartDetails : ContentPage
         }
         else 
         {
-            BindingContext = new CartViewModel(prodInCart);
+            var newProd = new Product
+                {
+                    Id = prodInCart.Id,
+                    Name = prodInCart.Name,
+                    Price = prodInCart.Price,
+                    Quantity = prodInCart.Quantity
+                };
+            BindingContext = new CartViewModel(newProd);
         }
     }
 }
