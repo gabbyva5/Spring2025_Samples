@@ -1,5 +1,6 @@
 using Library.eCommerce.Services;
 using Maui.eCommerce.ViewModels;
+using Spring2025_Samples.Models;
 
 namespace Maui.eCommerce.Views;
 
@@ -24,15 +25,33 @@ public partial class CartDetails : ContentPage
         Shell.Current.GoToAsync("//CartManagement");
     }
 
+
     private void ContentPage_NavigatedTo(object sender, NavigatedToEventArgs e)
     {
-        if(ShoppingCartService.Current.GetById(ProductId) == null)
+        var inventoryProduct = ProductServiceProxy.Current.GetById(ProductId); 
+        var prodInCart = ShoppingCartService.Current.GetById(ProductId); 
+
+        if(prodInCart == null)
         {
-            BindingContext = new CartViewModel(ProductServiceProxy.Current.GetById(ProductId));
+            if (inventoryProduct != null)
+            {
+                var newProd = new Product
+                {
+                    Id = inventoryProduct.Id,
+                    Name = inventoryProduct.Name,
+                    Price = inventoryProduct.Price,
+                    Quantity = 1 
+                };
+                BindingContext = new CartViewModel(newProd);
+            }
+            else
+            {
+                Shell.Current.GoToAsync("//CartManagement"); 
+            }
         }
-        else
+        else 
         {
-            BindingContext = new CartViewModel(ShoppingCartService.Current.GetById(ProductId)); 
+            BindingContext = new CartViewModel(prodInCart);
         }
     }
 }

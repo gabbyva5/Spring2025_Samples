@@ -11,9 +11,15 @@ public partial class CartManagementView : ContentPage
 		BindingContext = new CartManagementViewModel();
 	}
 
-    private void AddOrUpdateClicked(object sender, EventArgs e)
+    private void AddClicked(object sender, EventArgs e)
     {
         var productId = (BindingContext as CartManagementViewModel)?.SelectedProduct?.Id;
+        Shell.Current.GoToAsync($"//Cart?productId={productId}");
+    }
+
+    private void EditClicked(object sender, EventArgs e)
+    {
+        var productId = (BindingContext as CartManagementViewModel)?.SelectedItem?.Id;
         Shell.Current.GoToAsync($"//Cart?productId={productId}");
     }
 
@@ -42,5 +48,4 @@ public partial class CartManagementView : ContentPage
         (BindingContext as CartManagementViewModel)?.RefreshInventoryList();
         (BindingContext as CartManagementViewModel)?.RefreshCartList();
     }
-
 }

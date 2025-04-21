@@ -35,7 +35,7 @@ namespace Library.eCommerce.Services
             }
         }
 
-        public Product? AddOrUpdateCart(Product product)
+        public Product? AddOrUpdate(Product product)
         {
             var inventoryProd = ProductServiceProxy.Current.GetById(product.Id);
             var prodInCart = GetById(product.Id);
@@ -43,7 +43,7 @@ namespace Library.eCommerce.Services
             if(inventoryProd == null) 
                 return null;
 
-            if(prodInCart == null)     //triggered by AddtoCart and item isn't alr in can
+            if(prodInCart == null)     //triggered by AddtoCart and item isn't alr in cart
             {
                 if(product.Quantity == 0)
                     return null;
@@ -51,7 +51,13 @@ namespace Library.eCommerce.Services
                 if(inventoryProd.Quantity < product.Quantity)
                     product.Quantity = inventoryProd.Quantity;
 
-                Cart.Items?.Add(product);
+                Cart.Items?.Add(new Product 
+                {
+                    Id= product.Id,
+                    Name= product.Name,
+                    Quantity= product.Quantity,
+                    Price= product.Price,
+                });
                 inventoryProd.Quantity-= product.Quantity;
                 return product;
             }

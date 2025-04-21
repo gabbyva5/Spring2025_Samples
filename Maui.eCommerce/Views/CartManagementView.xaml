@@ -31,13 +31,13 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Label Grid.Column="0" Text="{Binding Display}"/>
-                            <Button Grid.Column="1" Text="Add to Cart" Clicked="AddOrUpdateClicked"/>
+                            <Button Grid.Column="1" Text="Add to Cart" Clicked="AddClicked"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Text="Add to Cart" Clicked="AddOrUpdateClicked"/>
+        <Button Text="Add to Cart" Clicked="AddClicked"/>
 
         <Label Text="Shopping Cart Items" FontSize="20" HorizontalOptions="Center" Margin="0,50,0,15"/>
 
@@ -65,14 +65,14 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Label Grid.Column="0" Text="{Binding Display}"/>
-                            <Button Grid.Column="1" Text="Edit" Clicked="AddOrUpdateClicked"/>
+                            <Button Grid.Column="1" Text="Edit" Clicked="EditClicked"/>
                             <Button Grid.Column="2" Text="Delete" Clicked="DeleteClicked"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button Text="Edit" Clicked="AddOrUpdateClicked"/>
+        <Button Text="Edit" Clicked="EditClicked"/>
         <Button Text="Delete" Clicked="DeleteClicked"/>
         <Button Text="Go Back" Clicked="CancelClicked"/>
 

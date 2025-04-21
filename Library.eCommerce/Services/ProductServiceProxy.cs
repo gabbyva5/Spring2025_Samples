@@ -55,7 +55,6 @@ namespace Library.eCommerce.Services
 
         public Product? AddOrUpdate(Product product)
         {
-
             if(product.Id == 0)
             {
                 product.Id = LastKey + 1;
@@ -95,8 +94,5 @@ namespace Library.eCommerce.Services
         {
             return Products.FirstOrDefault(p => p?.Id == id);
         }
-
     }
-
-    
 }
