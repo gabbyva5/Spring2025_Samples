@@ -31,7 +31,7 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Label Grid.Column="0" Text="{Binding Display}"/>
-                            <Button Grid.Column="1" Text="Add to Cart"/>
+                            <Button Grid.Column="1" Text="Add to Cart" Clicked="AddOrUpdateClicked"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
@@ -53,7 +53,7 @@
         <!--Cart--> 
         <ListView
             ItemsSource="{Binding Products}"
-            SelectedItem="{Binding SelectedProduct}"
+            SelectedItem="{Binding SelectedItem}"
             >
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -65,8 +65,8 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
                             <Label Grid.Column="0" Text="{Binding Display}"/>
-                            <Button Grid.Column="1" Text="Edit"/>
-                            <Button Grid.Column="1" Text="Delete"/>
+                            <Button Grid.Column="1" Text="Edit" Clicked="AddOrUpdateClicked"/>
+                            <Button Grid.Column="2" Text="Delete" Clicked="DeleteClicked"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>

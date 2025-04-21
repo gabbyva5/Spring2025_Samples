@@ -83,7 +83,7 @@ namespace Library.eCommerce.Services
                 }
             }
 
-            return null;    //return null if attempted product does not exist
+            else return null;    //return null if attempted product does not exist
         }
 
         public Product? Delete(int id)

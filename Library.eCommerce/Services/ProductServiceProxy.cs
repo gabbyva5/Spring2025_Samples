@@ -13,9 +13,9 @@ namespace Library.eCommerce.Services
         {
             Products = new List<Product?>
             {
-                new Product{Id = 1, Name ="Product 1", Price=12.99},
-                new Product{Id = 2, Name ="Product 2", Price=30.00},
-                new Product{Id = 3, Name ="Product 3", Price=4.00}
+                new Product{Id = 1, Name ="Product 1", Quantity= 8, Price=12.99},
+                new Product{Id = 2, Name ="Product 2", Quantity= 4, Price=30.00},
+                new Product{Id = 3, Name ="Product 3", Quantity=6, Price=4.00}
             };
         }
 
@@ -93,7 +93,7 @@ namespace Library.eCommerce.Services
 
         public Product? GetById(int id)
         {
-            return Products.FirstOrDefault(p => p.Id == id);
+            return Products.FirstOrDefault(p => p?.Id == id);
         }
 
     }

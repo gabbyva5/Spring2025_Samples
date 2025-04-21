@@ -28,7 +28,7 @@ public partial class CartDetails : ContentPage
     {
         if(ShoppingCartService.Current.GetById(ProductId) == null)
         {
-            BindingContext = new CartViewModel();
+            BindingContext = new CartViewModel(ProductServiceProxy.Current.GetById(ProductId));
         }
         else
         {

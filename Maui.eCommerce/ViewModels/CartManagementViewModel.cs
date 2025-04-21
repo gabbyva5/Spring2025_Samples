@@ -13,7 +13,8 @@ namespace Maui.eCommerce.ViewModels
 {
     public class CartManagementViewModel : INotifyPropertyChanged
     {
-        public Product? SelectedProduct { get; set; }
+        public Product? SelectedProduct { get; set; }   //for inventory list
+        public Product? SelectedItem { get; set; }  //for cart list
         public string? Query { get; set; }
         private ShoppingCartService cartService = ShoppingCartService.Current;
         private ProductServiceProxy inventoryProxy = ProductServiceProxy.Current;
@@ -41,7 +42,7 @@ namespace Maui.eCommerce.ViewModels
 
         public Product? Delete()
         {
-            var item = cartService.Delete(SelectedProduct?.Id ?? 0);
+            var item = cartService.Delete(SelectedItem?.Id ?? 0);
             NotifyPropertyChanged("Products");
             NotifyPropertyChanged("InventoryProducts");
             return item;
