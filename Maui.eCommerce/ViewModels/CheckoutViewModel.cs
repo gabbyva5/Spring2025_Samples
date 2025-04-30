@@ -11,20 +11,36 @@ namespace Maui.eCommerce.ViewModels;
 public class CheckoutViewModel : INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
-    public ObservableCollection<Product> ReceiptItems {get; private set;}
-    public double Subtotal { get; private set; }
-    public double TaxAmount { get; private set; }
-    public double Total { get; private set; }
-    
-    public CheckoutViewModel()
+    public ObservableCollection<Product> ReceiptItems 
     {
-        ReceiptItems = new ObservableCollection<Product>(
-            ShoppingCartService.Current.Cart.Items?.Where(item => item != null).ToList()?? new List<Product>());
-
-        Subtotal = ReceiptItems.Sum(item => (item?.Price ?? 0) * (item?.Quantity ?? 0));
-        TaxAmount = Subtotal * 0.07;
-        Total = Subtotal + TaxAmount; 
+        get
+        {
+            var list = ShoppingCartService.Current.Cart.Items?.Where(item => item != null).ToList()?? new List<Product>();
+            return new ObservableCollection<Product>(list);
+        }  
     }
+    public double Subtotal 
+    {
+        get
+        {
+            return ReceiptItems.Sum(item => (item?.Price ?? 0) * (item?.Quantity ?? 0));
+        }
+    }
+    public double TaxAmount
+    {
+        get
+        {
+            return Subtotal * 0.07;
+        }
+    }
+    public double Total 
+    {
+        get
+        {
+            return Subtotal + TaxAmount; 
+        }
+    }
+
 
     public void RefreshReceipt()
     {

@@ -76,7 +76,7 @@
         <Button Text="Delete" Clicked="DeleteClicked"/>
         <Button Text="Go Back" Clicked="CancelClicked"/>
 
-        <Button Text="Checkout" FontSize="20" HorizontalOptions="Center" Margin="0,50,0,15" Clicked="CheckoutClicked"/>
+        <Button Text="Checkout" Clicked="CheckoutClicked"/>
 
     </VerticalStackLayout>
 </ContentPage>

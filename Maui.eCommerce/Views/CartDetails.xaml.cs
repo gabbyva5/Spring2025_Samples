@@ -44,10 +44,7 @@ public partial class CartDetails : ContentPage
                 };
                 BindingContext = new CartViewModel(newProd);
             }
-            else
-            {
-                Shell.Current.GoToAsync("//CartManagement"); 
-            }
+            else Shell.Current.GoToAsync("//CartManagement"); 
         }
         else 
         {

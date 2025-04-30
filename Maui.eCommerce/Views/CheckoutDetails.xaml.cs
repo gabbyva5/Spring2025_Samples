@@ -7,8 +7,13 @@ public partial class CheckoutDetails : ContentPage
 {
     public CheckoutDetails()
     {
-        InitializeComponent();        
-        BindingContext = new CheckoutViewModel();
+        InitializeComponent();       
+        BindingContext= new CheckoutViewModel();
+    }
+
+    private void RefreshClicked(object sender, EventArgs e)
+    {
+        (BindingContext as CheckoutViewModel)?.RefreshReceipt();
     }
 
     private void CancelClicked(object sender, EventArgs e)
@@ -18,6 +23,7 @@ public partial class CheckoutDetails : ContentPage
 
     private void ContentPage_NavigatedTo(object sender, NavigatedToEventArgs e)
     {
+        BindingContext= new CheckoutViewModel();
         (BindingContext as CheckoutViewModel)?.RefreshReceipt();
     }
 }

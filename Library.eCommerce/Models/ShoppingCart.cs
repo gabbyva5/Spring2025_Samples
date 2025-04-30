@@ -12,7 +12,11 @@ namespace Spring2025_Samples.Models
 
         public ShoppingCart() 
         { 
-            Items = new List<Product>();
+            Items = new List<Product>
+            {
+                new Product{Id = 1, Name ="Product 1", Quantity= 2, Price=12.99},
+                new Product{Id = 3, Name ="Product 3", Quantity=1, Price=4.00}
+            };
         }
     }
 }
